@@ -6,6 +6,7 @@ public class ProjectileMovment : MonoBehaviour {
 	private float time = 0.0f;
 	private Vector3 direction;
 	private Player player;
+	private int damage = 10;
 	// Use this for initialization
 
 	void Start () {
@@ -35,9 +36,21 @@ public class ProjectileMovment : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D (Collider2D other){
-		if(other.tag != "Player"){
+
+		if (other.tag == "Enemy") {
+			other.SendMessage("ApplyDamage", damage);
+			//other.transform.SendMessage("ApplyDamage", 10);
+			//other.BroadcastMessage("ApplylDamage", 10);
+			//other.GetComponent("EnemyController");
 			Destroy (gameObject);
 		}
+
+		if(other.tag != "Player"){
+
+			Destroy (gameObject);
+		}
+
+
 	}
 
 }

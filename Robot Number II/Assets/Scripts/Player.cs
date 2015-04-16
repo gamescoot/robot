@@ -17,6 +17,9 @@ public class Player : MonoBehaviour {
 	//refrences
 	private Rigidbody2D rb2d;
 	private Animator anim;
+
+	//Game values
+	//private int health =100;
 	
 
 	// Use this for initialization
