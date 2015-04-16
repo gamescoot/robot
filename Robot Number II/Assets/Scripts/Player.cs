@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
 	public bool grounded;
 	public bool canDoubleJump;
 
+	public int direction = 1;
 
 	//refrences
 	private Rigidbody2D rb2d;
@@ -35,10 +36,12 @@ public class Player : MonoBehaviour {
 		anim.SetFloat ("Speed", Mathf.Abs(rb2d.velocity.x));
 
 		if (Input.GetAxis ("Horizontal") < -0.1f) {
+			direction = -1;
 			transform.localScale = new Vector3(-1,1,1);
 		}
 		if (Input.GetAxis ("Horizontal") > 0.1f) {
 			transform.localScale = new Vector3(1,1,1);
+			direction = 1;
 		}
 
 
@@ -93,6 +96,8 @@ public class Player : MonoBehaviour {
 			rb2d.velocity = new Vector2 (-maxSpeed, rb2d.velocity.y);
 		}
 	}
+
+
 }
 
 
