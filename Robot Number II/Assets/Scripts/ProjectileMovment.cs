@@ -3,37 +3,41 @@ using System.Collections;
 
 public class ProjectileMovment : MonoBehaviour {
 	public float speed;
-	public float time = 0.0f;
+	private float time = 0.0f;
+	private Vector3 direction;
+	private Player player;
 	// Use this for initialization
+
 	void Start () {
-	
+		player = (Player)FindObjectOfType (typeof(Player));
+
+
+		if (player.direction > 0) {
+			direction = new Vector3 (1, 0, 0);
+		} else {
+			direction = new Vector3(-1, 0, 0);
+		}
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
 		time += Time.deltaTime;
-		Vector3 direction;
-
-		if (Input.GetAxis ("Horizontal") < -0.1f) {
-			direction = new Vector3(-1, 0, 0);
-		}
-		if (Input.GetAxis ("Horizontal") > 0.1f) {
-			direction = new Vector3(1, 0, 0);
-		}
 
 
-
-		direction = new Vector3(1, 0, 0);
-		transform.Translate (direction*speed*Time.deltaTime,Space.Self);
+		transform.Translate (direction * speed * Time.deltaTime);//,Space.Self);
 
 		if(time > 2)
 		{
 			Destroy(gameObject);
 		}
 	}
-
-	void OnCollisionEnter (Collision other){
-		Destroy (gameObject);
+	
+	void OnTriggerEnter2D (Collider2D other){
+		if(other.tag != "Player"){
+			Destroy (gameObject);
+		}
 	}
+
 }
