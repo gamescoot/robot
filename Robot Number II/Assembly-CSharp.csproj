@@ -50,7 +50,8 @@
      <Compile Include="Assets\Scripts\DeathTrigger.cs" />
      <Compile Include="Assets\Scripts\GroundCheck.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
-     <Compile Include="Assets\Scripts\Projectile.cs" />
+     <Compile Include="Assets\Scripts\PlayerProjectleShooter.cs" />
+     <Compile Include="Assets\Scripts\ProjectileMovment.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

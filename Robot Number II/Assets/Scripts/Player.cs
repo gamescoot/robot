@@ -44,16 +44,6 @@ public class Player : MonoBehaviour {
 
 
 
-
-		if (Input.GetButtonDown ("Fire1")) {
-			Vector3 velocity;
-			velocity = new Vector3(1, 0, 0);
-			GameObject proj = (GameObject) Instantiate(Resources.Load("Proj"));
-			proj.transform.position = this.transform.position;
-		}
-
-
-
 		if (Input.GetButtonDown ("Jump"))
 		{
 			if (grounded){
