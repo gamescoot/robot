@@ -56,9 +56,6 @@
      <Compile Include="Assets\Scripts\ProjectileMovment.cs" />
      <Compile Include="Assets\Scripts\WeaponBehavior.cs" />
  <Reference Include="UnityEngine.UI">
- <HintPath>d:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>

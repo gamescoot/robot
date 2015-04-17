@@ -26,7 +26,7 @@ public class WeaponBehavior : MonoBehaviour {
 		if (relmousepos.x > 0)
 			angle = 360-angle;
 		Quaternion quat = Quaternion.identity;
-		quat.eulerAngles = new Vector3(0,0,angle); //Changing angle
+		quat.eulerAngles = new Vector3(0,0,angle + 90); //Changing angle
 		transform.rotation = quat;
 		transform.position = playerpos;
 	
