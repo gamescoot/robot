@@ -7,9 +7,14 @@ public class ProjectileMovment : MonoBehaviour {
 	private Vector3 direction;
 	private Player player;
 	private int damage = 10;
+	private string shooterTag;
 	// Use this for initialization
 
 	void Start () {
+
+
+
+
 		player = (Player)FindObjectOfType (typeof(Player));
 
 
@@ -39,9 +44,6 @@ public class ProjectileMovment : MonoBehaviour {
 
 		if (other.tag == "Enemy") {
 			other.SendMessage("ApplyDamage", damage);
-			//other.transform.SendMessage("ApplyDamage", 10);
-			//other.BroadcastMessage("ApplylDamage", 10);
-			//other.GetComponent("EnemyController");
 			Destroy (gameObject);
 		}
 

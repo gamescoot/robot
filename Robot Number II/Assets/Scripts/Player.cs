@@ -19,7 +19,6 @@ public class Player : MonoBehaviour {
 	private Animator anim;
 
 	//Game values
-	public Vector3 spawnLocation;
 	private float health =100.0f;
 	
 
@@ -28,21 +27,19 @@ public class Player : MonoBehaviour {
 
 		rb2d = gameObject.GetComponent<Rigidbody2D> ();
 		anim = gameObject.GetComponent<Animator> ();
-	
 	}
 	
 	// Update is called once per frame
 	//public Transform testProj;
 	void Update () {
 	
+		anim.SetBool("Grounded", grounded);
+		anim.SetFloat ("Speed", Mathf.Abs(rb2d.velocity.x));
+
 		if (health <= 0.0) {
 			Respawn();
 		}
 
-
-
-		anim.SetBool("Grounded", grounded);
-		anim.SetFloat ("Speed", Mathf.Abs(rb2d.velocity.x));
 
 		UpdateSprite ();
 
@@ -112,9 +109,6 @@ public class Player : MonoBehaviour {
 
 		Application.LoadLevel(Application.loadedLevel);
 
-		//GameObject newPlayer = (GameObject) Instantiate(Resources.Load("Player"));
-		//newPlayer.transform.position = spawnLocation;
-		//Destroy (gameObject);
 
 	}
 

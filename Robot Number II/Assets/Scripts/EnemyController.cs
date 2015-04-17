@@ -20,8 +20,8 @@ public class EnemyController : MonoBehaviour {
 	
 	//Game values
 	private float health =100;
-	
 	private float time = 0.0f;
+	
 	// Use this for initialization
 	void Start () {
 		
@@ -38,10 +38,7 @@ public class EnemyController : MonoBehaviour {
 		time += Time.deltaTime;
 		
 		if (health <= 0.0) {
-			GameObject newEnemy = (GameObject) Instantiate(Resources.Load("Enemy"));
-
-			newEnemy.transform.position = new Vector3(2.4f,1.4f,0.0f);
-			Destroy (gameObject);
+			Respawn();
 		}
 
 
@@ -52,14 +49,8 @@ public class EnemyController : MonoBehaviour {
 			this.direction = this.direction*-1;
 		}
 
-		if (direction < -0.1f) {
-			direction = -1;
-			transform.localScale = new Vector3(-1,1,1);
-		}
-		if (direction > 0.1f) {
-			transform.localScale = new Vector3(1,1,1);
-			direction = 1;
-		}
+		UpdateSprite ();
+
 		
 	}
 	
@@ -94,6 +85,24 @@ public class EnemyController : MonoBehaviour {
 	
 	void ApplyDamage(float damage){
 		this.health = this.health - damage;
+	}
+
+	void Respawn(){
+		GameObject newEnemy = (GameObject) Instantiate(Resources.Load("Enemy"));
+		newEnemy.transform.position = new Vector3(2.4f,1.4f,0.0f);
+		Destroy (gameObject);
+		
+	}
+
+	void UpdateSprite(){
+		if (direction < -0.1f) {
+			direction = -1;
+			transform.localScale = new Vector3(-1,1,1);
+		}
+		if (direction > 0.1f) {
+			transform.localScale = new Vector3(1,1,1);
+			direction = 1;
+		}
 	}
 	
 	
