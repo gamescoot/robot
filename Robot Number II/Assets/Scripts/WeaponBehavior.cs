@@ -13,8 +13,8 @@ public class WeaponBehavior : MonoBehaviour {
 	void Update () {
 
 		Vector2 playerpos = GameObject.FindGameObjectWithTag("Player").transform.position;
-		playerpos.x = playerpos.x + 0.15f;
-		playerpos.y = playerpos.y - 0.2f;
+		playerpos.x = playerpos.x + 0.2f;
+		//playerpos.y = playerpos.y;
 
 
 
