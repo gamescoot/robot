@@ -5,7 +5,8 @@ public class ProjectileMovment : MonoBehaviour {
 	public float speed;
 	private float time = 0.0f;
 	private Vector3 direction;
-	private Player player;
+	private ICharacter character;
+	private int characterDirection;
 	private int damage = 10;
 	private string shooterTag;
 	// Use this for initialization
@@ -15,10 +16,10 @@ public class ProjectileMovment : MonoBehaviour {
 
 
 
-		player = (Player)FindObjectOfType (typeof(Player));
 
+		this.characterDirection = character.GetDirection();
 
-		if (player.direction > 0) {
+		if (this.characterDirection > 0.0f) {
 			direction = new Vector3 (1, 0, 0);
 		} else {
 			direction = new Vector3(-1, 0, 0);
@@ -53,6 +54,10 @@ public class ProjectileMovment : MonoBehaviour {
 		}
 
 
+	}
+
+	public void SetCharacter(ICharacter character){
+		this.character = character;
 	}
 
 }
