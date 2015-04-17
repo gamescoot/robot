@@ -40,7 +40,7 @@ public class EnemyController : MonoBehaviour {
 		if (health <= 0.0) {
 			GameObject newEnemy = (GameObject) Instantiate(Resources.Load("Enemy"));
 
-			newEnemy.transform.position = new Vector3(4.2f,2.2f,0.0f);
+			newEnemy.transform.position = new Vector3(2.4f,1.4f,0.0f);
 			Destroy (gameObject);
 		}
 
