@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyController : MonoBehaviour {
+public class EnemyController : MonoBehaviour, ICharacter {
 	
 	//floats
 	public float maxSpeed = 3;
@@ -41,14 +41,7 @@ public class EnemyController : MonoBehaviour {
 			Respawn();
 		}
 
-
-
-		if(time > 2)
-		{
-			time= time -2;
-			this.direction = this.direction*-1;
-		}
-
+		AI ();
 		UpdateSprite ();
 
 		
@@ -82,10 +75,7 @@ public class EnemyController : MonoBehaviour {
 			rb2d.velocity = new Vector2 (-maxSpeed, rb2d.velocity.y);
 		}
 	}
-	
-	void ApplyDamage(float damage){
-		this.health = this.health - damage;
-	}
+
 
 	void Respawn(){
 		GameObject newEnemy = (GameObject) Instantiate(Resources.Load("Enemy"));
@@ -103,6 +93,26 @@ public class EnemyController : MonoBehaviour {
 			transform.localScale = new Vector3(1,1,1);
 			direction = 1;
 		}
+	}
+
+	void AI(){
+		if(time > 2)
+		{
+			time= time -2;
+			this.direction = this.direction*-1;
+		}
+	}
+
+	public void ApplyDamage(float damage){
+		this.health = this.health - damage;
+	}
+
+	public void SetGrounded(bool grd){
+		this.grounded = grd;
+	}
+	
+	public int GetDirection(){
+		return this.direction;
 	}
 	
 	

@@ -19,5 +19,9 @@ public class DeathTrigger : MonoBehaviour {
 			//Application.LoadLevel(Application.loadedLevel);
 			other.SendMessage("Respawn");
 		}
+
+		if (other.gameObject.CompareTag ("Enemy")) {
+			Destroy(other.gameObject);
+		}
 	}
 }

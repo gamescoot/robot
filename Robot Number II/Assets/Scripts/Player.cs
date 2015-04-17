@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, ICharacter {
 
 	//floats
 	public float maxSpeed = 3;
@@ -40,7 +40,6 @@ public class Player : MonoBehaviour {
 			Respawn();
 		}
 
-
 		UpdateSprite ();
 
 		if (Input.GetButtonDown ("Jump")){
@@ -75,11 +74,6 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void ApplyDamage(float damage){
-		this.health = this.health - damage;
-	}
-
-
 
 	void Jump(){
 		if (grounded){
@@ -111,6 +105,19 @@ public class Player : MonoBehaviour {
 
 
 	}
+
+	public void ApplyDamage(float damage){
+		this.health = this.health - damage;
+	}
+
+	public void SetGrounded(bool grd){
+		this.grounded = grd;
+	}
+
+	public int GetDirection(){
+		return this.direction;
+	}
+
 
 }
 
