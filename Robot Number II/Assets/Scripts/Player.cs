@@ -19,7 +19,8 @@ public class Player : MonoBehaviour {
 	private Animator anim;
 
 	//Game values
-	//private int health =100;
+	public Vector3 spawnLocation;
+	private float health =100.0f;
 	
 
 	// Use this for initialization
@@ -34,40 +35,19 @@ public class Player : MonoBehaviour {
 	//public Transform testProj;
 	void Update () {
 	
+		if (health <= 0.0) {
+			Respawn();
+		}
+
+
 
 		anim.SetBool("Grounded", grounded);
 		anim.SetFloat ("Speed", Mathf.Abs(rb2d.velocity.x));
 
-		if (Input.GetAxis ("Horizontal") < -0.1f) {
-			direction = -1;
-			transform.localScale = new Vector3(-1,1,1);
-		}
-		if (Input.GetAxis ("Horizontal") > 0.1f) {
-			transform.localScale = new Vector3(1,1,1);
-			direction = 1;
-		}
+		UpdateSprite ();
 
-
-
-
-		if (Input.GetButtonDown ("Jump"))
-		{
-			if (grounded){
-				rb2d.AddForce(Vector2.up * jumpPower);	
-				canDoubleJump = true;
-			}else
-			{
-
-				if (canDoubleJump)
-				{
-					canDoubleJump = false;
-					rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-					rb2d.AddForce(Vector2.up * jumpPower);
-				}
-			
-			}
-				
-
+		if (Input.GetButtonDown ("Jump")){
+			Jump();		
 		}
 	}
 
@@ -84,7 +64,6 @@ public class Player : MonoBehaviour {
 			rb2d.velocity = easeVelocity;
 		}
 
-
 		//moves player
 		float h = Input.GetAxis ("Horizontal");
 		rb2d.AddForce ((Vector2.right * speed) * h);
@@ -94,12 +73,50 @@ public class Player : MonoBehaviour {
 		if (rb2d.velocity.x > maxSpeed) {
 			rb2d.velocity = new Vector2 (maxSpeed, rb2d.velocity.y);
 		}
-
 		if (rb2d.velocity.x < -maxSpeed) {
 			rb2d.velocity = new Vector2 (-maxSpeed, rb2d.velocity.y);
 		}
 	}
 
+	void ApplyDamage(float damage){
+		this.health = this.health - damage;
+	}
+
+
+
+	void Jump(){
+		if (grounded){
+			rb2d.AddForce(Vector2.up * jumpPower);	
+			canDoubleJump = true;
+		}else{
+			
+			if (canDoubleJump){
+				canDoubleJump = false;
+				rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+				rb2d.AddForce(Vector2.up * jumpPower);
+			}			
+		}
+	}
+
+	void UpdateSprite(){
+		if (Input.GetAxis ("Horizontal") < -0.1f) {
+			direction = -1;
+			transform.localScale = new Vector3(-1,1,1);
+		}
+		if (Input.GetAxis ("Horizontal") > 0.1f) {
+			transform.localScale = new Vector3(1,1,1);
+			direction = 1;
+		}
+	}
+	void Respawn(){
+
+		Application.LoadLevel(Application.loadedLevel);
+
+		//GameObject newPlayer = (GameObject) Instantiate(Resources.Load("Player"));
+		//newPlayer.transform.position = spawnLocation;
+		//Destroy (gameObject);
+
+	}
 
 }
 
