@@ -8,7 +8,7 @@ public class ProjectileMovment : MonoBehaviour {
 	private ICharacter character;
 	private int characterDirection;
 	private int damage = 10;
-	private string shooterTag;
+	private string characterTag;
 	// Use this for initialization
 
 	void Start () {
@@ -18,7 +18,7 @@ public class ProjectileMovment : MonoBehaviour {
 
 
 		this.characterDirection = character.GetDirection();
-
+		this.characterTag = this.character.GetTag ();
 		if (this.characterDirection > 0.0f) {
 			direction = new Vector3 (1, 0, 0);
 		} else {
@@ -43,13 +43,19 @@ public class ProjectileMovment : MonoBehaviour {
 	
 	void OnTriggerEnter2D (Collider2D other){
 
-		if (other.tag == "Enemy") {
-			other.SendMessage("ApplyDamage", damage);
+		if (other.tag.CompareTo("Ground") ==0) {
 			Destroy (gameObject);
 		}
 
-		if(other.tag != "Player"){
+		//if (other.tag != "Ground") {
+		//	Debug.Log("words");
+		//}
+		//if (other.tag == "Ground") {
+		//	other.SendMessage("ApplyDamage", damage);
+		//}
 
+		if(other.tag.CompareTo(this.characterTag) != 0 && other.tag.CompareTo("Ground") != 0 && other.tag.CompareTo("Projectile")!=0){
+			other.SendMessage("ApplyDamage", damage);
 			Destroy (gameObject);
 		}
 

@@ -17,6 +17,7 @@ public class Player : MonoBehaviour, ICharacter {
 	//refrences
 	private Rigidbody2D rb2d;
 	private Animator anim;
+	private ProjSpawner projspawner;
 
 	//Game values
 	private float health =100.0f;
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour, ICharacter {
 
 		rb2d = gameObject.GetComponent<Rigidbody2D> ();
 		anim = gameObject.GetComponent<Animator> ();
+		this.projspawner = gameObject.GetComponentInChildren<ProjSpawner> ();
 	}
 	
 	// Update is called once per frame
@@ -44,6 +46,13 @@ public class Player : MonoBehaviour, ICharacter {
 
 		if (Input.GetButtonDown ("Jump")){
 			Jump();		
+		}
+
+		if (Input.GetButtonDown ("Fire1")) {
+			this.projspawner.ShootProjOne();
+		}
+		if (Input.GetButtonDown ("Fire2")) {
+			this.projspawner.ShootProjTwo();
 		}
 	}
 
@@ -116,6 +125,10 @@ public class Player : MonoBehaviour, ICharacter {
 
 	public int GetDirection(){
 		return this.direction;
+	}
+
+	public string GetTag(){
+		return this.tag.ToString();
 	}
 
 

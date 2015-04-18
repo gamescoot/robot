@@ -21,12 +21,15 @@ public class EnemyController : MonoBehaviour, ICharacter {
 	//Game values
 	private float health =100;
 	private float time = 0.0f;
+	private ProjSpawner projspawner;
+	private float attackTimer = 0.0f;
 	
 	// Use this for initialization
 	void Start () {
 		
 		rb2d = gameObject.GetComponent<Rigidbody2D> ();
 		anim = gameObject.GetComponent<Animator> ();
+		this.projspawner = gameObject.GetComponentInChildren<ProjSpawner> ();
 	}
 	
 
@@ -36,13 +39,15 @@ public class EnemyController : MonoBehaviour, ICharacter {
 		anim.SetFloat ("Speed", Mathf.Abs(rb2d.velocity.x));
 
 		time += Time.deltaTime;
-		
+		attackTimer += Time.deltaTime;
+
 		if (health <= 0.0) {
 			Respawn();
 		}
 
 		AI ();
 		UpdateSprite ();
+
 
 		
 	}
@@ -98,8 +103,14 @@ public class EnemyController : MonoBehaviour, ICharacter {
 	void AI(){
 		if(time > 2)
 		{
+
 			time= time -2;
 			this.direction = this.direction*-1;
+		}
+
+		if (attackTimer > .3) {
+			attackTimer = 0;
+			this.projspawner.ShootProjTwo ();
 		}
 	}
 
@@ -113,6 +124,10 @@ public class EnemyController : MonoBehaviour, ICharacter {
 	
 	public int GetDirection(){
 		return this.direction;
+	}
+
+	public string GetTag(){
+		return this.tag.ToString();
 	}
 	
 	
