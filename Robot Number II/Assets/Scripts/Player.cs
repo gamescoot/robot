@@ -131,6 +131,10 @@ public class Player : MonoBehaviour, ICharacter {
 		return this.tag.ToString();
 	}
 
+	public Vector3 GetPosition(){
+		return this.transform.position;
+	}
+
 
 }
 

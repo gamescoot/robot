@@ -21,6 +21,7 @@ public class DeathTrigger : MonoBehaviour {
 		}
 
 		if (other.gameObject.CompareTag ("Enemy")) {
+			other.SendMessage("Respawn");
 			Destroy(other.gameObject);
 		}
 	}

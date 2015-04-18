@@ -7,4 +7,5 @@ public interface ICharacter{
 	void ApplyDamage(float damage);
 	int GetDirection();
 	string GetTag();
+	Vector3 GetPosition();
 }

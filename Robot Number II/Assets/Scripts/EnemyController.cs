@@ -21,12 +21,18 @@ public class EnemyController : MonoBehaviour, ICharacter {
 	//Game values
 	private float health =100;
 	private float time = 0.0f;
-	private ProjSpawner projspawner;
 	private float attackTimer = 0.0f;
+	private float visionDistance = 3;
+
+	private ICharacter player;
+	private float distanceToPlayer;
+	private float directionToPlayer;
+	private ProjSpawner projspawner;
 	
 	// Use this for initialization
 	void Start () {
-		
+		//player =(ICharacter) GameObject.FindGameObjectWithTag("Player");
+		player =(ICharacter) FindObjectOfType (typeof(Player));
 		rb2d = gameObject.GetComponent<Rigidbody2D> ();
 		anim = gameObject.GetComponent<Animator> ();
 		this.projspawner = gameObject.GetComponentInChildren<ProjSpawner> ();
@@ -34,6 +40,17 @@ public class EnemyController : MonoBehaviour, ICharacter {
 	
 
 	void Update () {
+
+
+		if (this.transform.position.x < this.player.GetPosition ().x) {
+			this.directionToPlayer = -1;
+		} else {
+			this.directionToPlayer = 1;
+		}
+
+		this.distanceToPlayer = Mathf.Abs( this.transform.position.x - this.player.GetPosition ().x);
+
+
 
 		anim.SetBool("Grounded", grounded);
 		anim.SetFloat ("Speed", Mathf.Abs(rb2d.velocity.x));
@@ -101,17 +118,29 @@ public class EnemyController : MonoBehaviour, ICharacter {
 	}
 
 	void AI(){
-		if(time > 2)
-		{
 
-			time= time -2;
-			this.direction = this.direction*-1;
+		if (this.distanceToPlayer > this.visionDistance) {
+			if (time > 2) {
+				time = 0;
+				this.direction = this.direction * -1;
+			}
+		} else {
+			if (this.directionToPlayer == -1.0f) {
+				this.direction = 1;
+			} else {
+				this.direction = -1;
+			}
+		}
+		if (this.GetComponent<Rigidbody2D> ().velocity.x == 0) {
+			this.Jump ();
 		}
 
-		if (attackTimer > .3) {
-			attackTimer = 0;
-			this.projspawner.ShootProjTwo ();
-		}
+		if (this.distanceToPlayer < this.visionDistance){
+			if (attackTimer > .3) {
+				attackTimer = 0;
+				this.projspawner.ShootProjTwo ();
+			}
+	}
 	}
 
 	public void ApplyDamage(float damage){
@@ -128,6 +157,24 @@ public class EnemyController : MonoBehaviour, ICharacter {
 
 	public string GetTag(){
 		return this.tag.ToString();
+	}
+
+	public Vector3 GetPosition(){
+		return this.transform.position;
+	}
+
+	void Jump(){
+		if (grounded){
+			rb2d.AddForce(Vector2.up * jumpPower);	
+			canDoubleJump = true;
+		}else{
+			
+			if (canDoubleJump){
+				canDoubleJump = false;
+				rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+				rb2d.AddForce(Vector2.up * jumpPower);
+			}			
+		}
 	}
 	
 	
