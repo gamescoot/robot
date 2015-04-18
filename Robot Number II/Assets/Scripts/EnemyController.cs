@@ -22,7 +22,8 @@ public class EnemyController : MonoBehaviour, ICharacter {
 	private float health =100;
 	private float time = 0.0f;
 	private float attackTimer = 0.0f;
-	private float visionDistance = 3;
+
+	public float visionDistance;
 
 	private ICharacter player;
 	private float distanceToPlayer;
