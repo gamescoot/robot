@@ -12,16 +12,22 @@ public class GroundCheck : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		parent.SetGrounded(true);
+		if (col.tag == "Ground" || col.tag == "Player") {
+			parent.SetGrounded (true);
+		}
 	}
 
 	void OnTriggerStay2D(Collider2D col)
 	{
-		parent.SetGrounded(true);
+		if (col.tag == "Ground" || col.tag == "Player") {
+			parent.SetGrounded (true);
+		}
 	}
 
 	void OnTriggerExit2D(Collider2D col)
 	{
-		parent.SetGrounded(false);
+		if (col.tag == "Ground" || col.tag == "Player") {
+			parent.SetGrounded (false);
+		}
 	}
 }

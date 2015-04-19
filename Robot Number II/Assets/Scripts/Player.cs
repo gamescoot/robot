@@ -39,7 +39,7 @@ public class Player : MonoBehaviour, ICharacter {
 		anim.SetFloat ("Speed", Mathf.Abs(rb2d.velocity.x));
 
 		if (health <= 0.0) {
-			Respawn();
+			Die();
 		}
 
 		UpdateSprite ();
@@ -113,6 +113,10 @@ public class Player : MonoBehaviour, ICharacter {
 		Application.LoadLevel(Application.loadedLevel);
 
 
+	}
+
+	public void Die(){
+		Application.LoadLevel(Application.loadedLevel);
 	}
 
 	public void ApplyDamage(float damage){

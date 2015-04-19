@@ -17,12 +17,12 @@ public class DeathTrigger : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag ("Player")) {
 			//Application.LoadLevel(Application.loadedLevel);
-			other.SendMessage("Respawn");
+			other.SendMessage("Die");
 		}
 
 		if (other.gameObject.CompareTag ("Enemy")) {
-			other.SendMessage("Respawn");
-			Destroy(other.gameObject);
+			other.SendMessage("Die");
+			//Destroy(other.gameObject);
 		}
 	}
 }
