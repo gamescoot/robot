@@ -47,7 +47,6 @@ public class Player : MonoBehaviour, ICharacter {
 		if (Input.GetButtonDown ("Jump")){
 			Jump();		
 		}
-
 		if (Input.GetButtonDown ("Fire1")) {
 			this.projspawner.ShootProjOne();
 		}
@@ -109,10 +108,7 @@ public class Player : MonoBehaviour, ICharacter {
 		}
 	}
 	void Respawn(){
-
 		Application.LoadLevel(Application.loadedLevel);
-
-
 	}
 
 	public void Die(){
