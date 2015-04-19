@@ -60,7 +60,7 @@ public class EnemyController : MonoBehaviour, ICharacter {
 		attackTimer += Time.deltaTime;
 
 		if (health <= 0.0) {
-			Respawn();
+			Die();
 		}
 
 		AI ();
@@ -105,6 +105,10 @@ public class EnemyController : MonoBehaviour, ICharacter {
 		newEnemy.transform.position = new Vector3(2.4f,1.4f,0.0f);
 		Destroy (gameObject);
 		
+	}
+
+	void Die(){
+		Destroy (gameObject);
 	}
 
 	void UpdateSprite(){
