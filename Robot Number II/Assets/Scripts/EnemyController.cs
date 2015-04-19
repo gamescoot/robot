@@ -198,7 +198,7 @@ public class EnemyController : MonoBehaviour, ICharacter {
 	}
 
 	void Jump(){
-		if (this.numOfJumps>0 && this.jumpTime < this.time-.5){
+		if (this.numOfJumps>0 && this.jumpTime < this.time-.3){
 			rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
 			rb2d.AddForce(Vector2.up * jumpPower);	
 			this.numOfJumps= this.numOfJumps-1;

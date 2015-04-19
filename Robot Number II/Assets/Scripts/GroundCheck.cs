@@ -12,21 +12,21 @@ public class GroundCheck : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col.tag == "Ground" || col.tag == "Player") {
+		if (col.tag == "Ground" || col.tag == "Player" || col.tag =="Enemy") {
 			parent.SetGrounded (true);
 		}
 	}
 
 	void OnTriggerStay2D(Collider2D col)
 	{
-		if (col.tag == "Ground" || col.tag == "Player") {
+		if (col.tag == "Ground" || col.tag == "Player"|| col.tag =="Enemy") {
 			parent.SetGrounded (true);
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D col)
 	{
-		if (col.tag == "Ground" || col.tag == "Player") {
+		if (col.tag == "Ground" || col.tag == "Player"|| col.tag =="Enemy") {
 			parent.SetGrounded (false);
 		}
 	}
