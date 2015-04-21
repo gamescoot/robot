@@ -46,7 +46,6 @@ public class ProjectileMovment : MonoBehaviour {
 		if (other.tag.CompareTo("Ground") ==0) {
 			Destroy (gameObject);
 		}
-
 		//if (other.tag != "Ground") {
 		//	Debug.Log("words");
 		//}
@@ -54,7 +53,7 @@ public class ProjectileMovment : MonoBehaviour {
 		//	other.SendMessage("ApplyDamage", damage);
 		//}
 
-		if (other.tag.CompareTo (this.characterTag) != 0 && other.tag.CompareTo ("Ground") != 0 && other.tag.CompareTo ("Projectile") != 0 && other.tag.CompareTo ("Objective") != 0 && other.tag.CompareTo ("DeathBox") != 0) {
+		if (other.tag.CompareTo (this.characterTag) != 0 && other.tag.CompareTo ("Ground") != 0 && other.tag.CompareTo ("Projectile") != 0 && other.tag.CompareTo ("Objective") != 0 && other.tag.CompareTo ("DeathBox") != 0 && other.tag.CompareTo ("Rope") != 0) {
 			other.SendMessage ("ApplyDamage", damage);
 			Destroy (gameObject);
 		} 

@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour, ICharacter {
 	//booleans
 	public bool grounded;
 	public bool canDoubleJump;
+	public bool canClimb;
 	public bool groundOnLeft;
 	public bool groundOnRight;
 	public bool noGroundLeft;
@@ -183,6 +184,10 @@ public class EnemyController : MonoBehaviour, ICharacter {
 
 	public void SetGrounded(bool grd){
 		this.grounded = grd;
+	}
+
+	public void SetCanClimb(bool canClimb){
+		this.canClimb = canClimb;
 	}
 	
 	public int GetDirection(){

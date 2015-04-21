@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Player : MonoBehaviour, ICharacter {
@@ -7,10 +7,12 @@ public class Player : MonoBehaviour, ICharacter {
 	public float maxSpeed = 3;
 	public float speed = 50f;
 	public float jumpPower = 200f;
+	public float climbPower = 1;
 
 	//booleans
 	public bool grounded;
 	public bool canDoubleJump;
+	public bool canClimb;
 
 	public int direction = 1;
 
@@ -35,15 +37,15 @@ public class Player : MonoBehaviour, ICharacter {
 	//public Transform testProj;
 	void Update () {
 	
-		anim.SetBool("Grounded", grounded);
-		anim.SetFloat ("Speed", Mathf.Abs(rb2d.velocity.x));
+		anim.SetBool ("Grounded", grounded);
+		anim.SetFloat ("Speed", Mathf.Abs (rb2d.velocity.x));
 
 		if (health <= 0.0) {
-			Die();
+			Die ();
 		}
 
 		UpdateSprite ();
-
+		
 		if (Input.GetButtonDown ("Jump")){
 			Jump();		
 		}
@@ -72,13 +74,19 @@ public class Player : MonoBehaviour, ICharacter {
 		float h = Input.GetAxis ("Horizontal");
 		rb2d.AddForce ((Vector2.right * speed) * h);
 
-
 		//limits the speed
 		if (rb2d.velocity.x > maxSpeed) {
 			rb2d.velocity = new Vector2 (maxSpeed, rb2d.velocity.y);
 		}
 		if (rb2d.velocity.x < -maxSpeed) {
 			rb2d.velocity = new Vector2 (-maxSpeed, rb2d.velocity.y);
+		}
+
+		float v = Input.GetAxis ("Vertical");
+		if (v != 0) {
+
+			Climb ();
+
 		}
 	}
 
@@ -92,8 +100,14 @@ public class Player : MonoBehaviour, ICharacter {
 			if (canDoubleJump){
 				canDoubleJump = false;
 				rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-				rb2d.AddForce(Vector2.up * jumpPower);
+				rb2d.AddForce(Vector2.up * jumpPower * Input.GetAxis("Horizontal"));
 			}			
+		}
+	}
+
+	void Climb(){
+		if (canClimb) {
+			rb2d.velocity = new Vector2(0, 5 * Input.GetAxis ("Vertical"));
 		}
 	}
 
@@ -119,8 +133,13 @@ public class Player : MonoBehaviour, ICharacter {
 		this.health = this.health - damage;
 	}
 
+	public void SetCanClimb(bool canClmb){
+		this.canClimb = canClmb;
+	}
+
 	public void SetGrounded(bool grd){
 		this.grounded = grd;
+
 	}
 
 	public int GetDirection(){
