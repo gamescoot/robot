@@ -45,7 +45,6 @@ public class Player : MonoBehaviour, ICharacter {
 		}
 
 		UpdateSprite ();
-		
 		if (Input.GetButtonDown ("Jump")){
 			Jump();		
 		}
@@ -64,7 +63,7 @@ public class Player : MonoBehaviour, ICharacter {
 		easeVelocity.y = rb2d.velocity.y;
 		easeVelocity.z = 0.0f;
 		easeVelocity.x *= 0.80f;
-		Physics2D.IgnoreLayerCollision (LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), canClimb);
+		Physics2D.IgnoreLayerCollision (LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), canClimb && ((Input.GetAxis("Vertical") > 0.1f) || (Input.GetAxis("Vertical") < -0.1f)) );
 		//fake friction
 		if (grounded) {
 			rb2d.velocity = easeVelocity;
@@ -83,10 +82,10 @@ public class Player : MonoBehaviour, ICharacter {
 		}
 
 		float v = Input.GetAxis ("Vertical");
-		if (v != 0 || grounded) {
+		Climb ();
 
-			Climb ();
-
+		if (!canClimb) {
+				rb2d.gravityScale = 1;
 		}
 	}
 
@@ -107,7 +106,8 @@ public class Player : MonoBehaviour, ICharacter {
 
 	void Climb(){
 		if (canClimb) {
-			rb2d.velocity = new Vector2(0, 5 * Input.GetAxis ("Vertical"));
+			rb2d.gravityScale = 0;
+			rb2d.velocity = new Vector2 (0, 5 * Input.GetAxis ("Vertical"));
 		}
 	}
 
