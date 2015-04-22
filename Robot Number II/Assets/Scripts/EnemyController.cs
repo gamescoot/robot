@@ -48,6 +48,7 @@ public class EnemyController : MonoBehaviour, ICharacter {
 		rb2d = gameObject.GetComponent<Rigidbody2D> ();
 		anim = gameObject.GetComponent<Animator> ();
 		this.projspawner = gameObject.GetComponentInChildren<ProjSpawner> ();
+		this.canClimb = false;
 	}
 	
 
@@ -200,6 +201,10 @@ public class EnemyController : MonoBehaviour, ICharacter {
 
 	public Vector3 GetPosition(){
 		return this.transform.position;
+	}
+
+	public bool GetCanClimb() {
+		return false;
 	}
 
 	void Jump(){

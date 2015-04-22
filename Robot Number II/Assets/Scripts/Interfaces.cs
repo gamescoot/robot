@@ -10,4 +10,5 @@ public interface ICharacter{
 	int GetDirection();
 	string GetTag();
 	Vector3 GetPosition();
+	bool GetCanClimb();
 }

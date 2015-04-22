@@ -64,7 +64,7 @@ public class Player : MonoBehaviour, ICharacter {
 		easeVelocity.y = rb2d.velocity.y;
 		easeVelocity.z = 0.0f;
 		easeVelocity.x *= 0.80f;
-
+		Physics2D.IgnoreLayerCollision (LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), canClimb);
 		//fake friction
 		if (grounded) {
 			rb2d.velocity = easeVelocity;
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour, ICharacter {
 		}
 
 		float v = Input.GetAxis ("Vertical");
-		if (v != 0) {
+		if (v != 0 || grounded) {
 
 			Climb ();
 
@@ -154,6 +154,9 @@ public class Player : MonoBehaviour, ICharacter {
 		return this.transform.position;
 	}
 
+	public bool GetCanClimb(){
+		return this.canClimb;
+	}
 
 }
 
